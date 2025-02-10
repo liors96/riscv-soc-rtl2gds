@@ -1,0 +1,7 @@
+# Cadence Genus(TM) Synthesis Solution, Version 21.15-s080_1, built Sep 23 2022 12:57:55
+
+# Date: Tue Jan 21 16:23:31 2025
+# Host: ip-10-70-140-38.il-central-1.compute.internal (x86_64 w/Linux 4.14.355-275.570.amzn2.x86_64) (1core*2cpus*1physical cpu*Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz 55296KB)
+# OS:   CentOS Linux release 7.9.2009 (Core)
+
+source ../scripts/genus.tcl

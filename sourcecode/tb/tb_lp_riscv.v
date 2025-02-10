@@ -1,7 +1,7 @@
-`define MY_ID 123456789*10  ; // Put your ID Number here - multiplied by 10
-`define MY_N 10
+`define MY_ID 316263664*10  ; // Put your ID Number here - multiplied by 10
+`define MY_N 22
 `ifdef GATE_LEVEL
- `define MEM_INSTANCE dccm_ram_0_sram_sp_16384x32
+ `define MEM_INSTANCE dccm_ram_0_sram_sp_8192x32
 `else 
  `define MEM_INSTANCE dccm_ram_0
 `endif
@@ -148,7 +148,6 @@ module tb_lp_riscv () ;
       if(!$value$plusargs("MEMLOAD=%s", memload)) memload = "PRELOAD";       
       $display("Using MEMLOAD method: %s\n\n", memload) ;      
       if (memload == "PRELOAD") mem_preload();
-      
 
       $display("\n\npre-sorted Vector\n");
       dut.lp_riscv.dccm_ram_wrapper.`MEM_INSTANCE.ram.mem[SORT_VEC/4] = `MY_ID ;	
@@ -174,12 +173,11 @@ module tb_lp_riscv () ;
    always @ (posedge dut.PAD_DONE_FLAG)
      begin
         $display("\n\npost-sorted Vector\n");  
-        for  (i=0;i<`MY_N;i=i+1)
+        for  (i=0;i<`MY_N;i=i+1) 
           $display("mem[h%8h] = %d" , SORT_VEC/4+i , dut.lp_riscv.dccm_ram_wrapper.`MEM_INSTANCE.ram.mem[SORT_VEC/4+i])  ;
         $display("\n\n");
         $display("Look, Ma! The numbers are sorted!");
         $display("And my ID is at index number: %2d\n\n", dut.lp_riscv.dccm_ram_wrapper.`MEM_INSTANCE.ram.mem[(SORT_VEC/4)-1]);
-
 
        $finish() ;
      end

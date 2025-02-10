@@ -1,0 +1,144 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2022 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[15:49:15.019913] Configured Lic search path (21.01-s002): 5280@ip-10-70-133-150.il-central-1.compute.internal
+
+Version: 21.15-s080_1, built Fri Sep 23 05:57:55 PDT 2022
+Options: 
+Date:    Tue Jan 21 15:49:15 2025
+Host:    ip-10-70-140-38.il-central-1.compute.internal (x86_64 w/Linux 4.14.355-275.570.amzn2.x86_64) (1core*2cpus*1physical cpu*Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz 55296KB) (8009452KB)
+PID:     24124
+OS:      CentOS Linux release 7.9.2009 (Core)
+
+*** Stack limited to 512 MB. This run may fail due to lack of stack space. ***
+
+
+[15:49:15.272184] Periodic Lic check successful
+[15:49:15.272193] Feature usage summary:
+[15:49:15.272194] Genus_Synthesis
+Checking out license: Genus_Synthesis
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Loading tool scripts...
+Finished loading tool scripts (8 seconds elapsed).
+
+WARNING: This version of the tool is 851 days old.
+@genus:root: 1> source scripts/genus.tcl
+File 'scripts/genus.tcl' does not exist.
+@genus:root: 2> source ../scripts/genus.tcl
+Sourcing '../scripts/genus.tcl' (Tue Jan 21 15:50:31 UTC 2025)...
+#@ Begin verbose source ../scripts/genus.tcl
+@file(genus.tcl) 2: set debug_file "debug.txt"
+@file(genus.tcl) 3: set design(TOPLEVEL) "lp_riscv_top"
+@file(genus.tcl) 4: set runtype "synthesis"
+@file(genus.tcl) 7: set mmmc_or_simple "simple"; # "simple" - using "read_libs"
+@file(genus.tcl) 9: set phys_synth_type "none" ;  # "none"   - don't read any physical data
+@file(genus.tcl) 15: source ../scripts/procedures.tcl -quiet
+@file(genus.tcl) 17: enics_start_stage "start"
+*****************************************
+*****************************************
+**   ENICSINFO: Starting stage start   **
+*****************************************
+*****************************************
+ENICSINFO: Current time is: 21/01/2025 15:50
+ENICSINFO: This session is running on Hostname : ip-10-70-140-38.il-central-1.compute.internal
+ENICSINFO: The log file is genus.log1 and the command file is genus.cmd1
+ENICSINFO: ----------------------------------
+@file(genus.tcl) 20: source ../inputs/$design(TOPLEVEL).defines -quiet
+#@ End verbose source ../scripts/genus.tcl
+wrong # args: should be "set varName ?newValue?"
+@genus:root: 3> source ../scripts/genus.tcl
+Sourcing '../scripts/genus.tcl' (Tue Jan 21 15:51:27 UTC 2025)...
+#@ Begin verbose source ../scripts/genus.tcl
+@file(genus.tcl) 2: set debug_file "debug.txt"
+@file(genus.tcl) 3: set design(TOPLEVEL) "lp_riscv_top"
+@file(genus.tcl) 4: set runtype "synthesis"
+@file(genus.tcl) 7: set mmmc_or_simple "simple"; # "simple" - using "read_libs"
+@file(genus.tcl) 9: set phys_synth_type "none" ;  # "none"   - don't read any physical data
+@file(genus.tcl) 15: source ../scripts/procedures.tcl -quiet
+@file(genus.tcl) 17: enics_start_stage "start"
+*****************************************
+*****************************************
+**   ENICSINFO: Starting stage start   **
+*****************************************
+*****************************************
+ENICSINFO: Current time is: 21/01/2025 15:51
+ENICSINFO: This session is running on Hostname : ip-10-70-140-38.il-central-1.compute.internal
+ENICSINFO: The log file is genus.log1 and the command file is genus.cmd1
+ENICSINFO: ----------------------------------
+@file(genus.tcl) 20: source ../inputs/$design(TOPLEVEL).defines -quiet
+#@ End verbose source ../scripts/genus.tcl
+wrong # args: should be "set varName ?newValue?"
+@genus:root: 4> source ../scripts/genus.tcl
+Sourcing '../scripts/genus.tcl' (Tue Jan 21 15:52:23 UTC 2025)...
+#@ Begin verbose source ../scripts/genus.tcl
+@file(genus.tcl) 2: set debug_file "debug.txt"
+@file(genus.tcl) 3: set design(TOPLEVEL) "lp_riscv_top"
+@file(genus.tcl) 4: set runtype "synthesis"
+@file(genus.tcl) 7: set mmmc_or_simple "simple"; # "simple" - using "read_libs"
+@file(genus.tcl) 9: set phys_synth_type "none" ;  # "none"   - don't read any physical data
+@file(genus.tcl) 15: source ../scripts/procedures.tcl -quiet
+@file(genus.tcl) 17: enics_start_stage "start"
+*****************************************
+*****************************************
+**   ENICSINFO: Starting stage start   **
+*****************************************
+*****************************************
+ENICSINFO: Current time is: 21/01/2025 15:52
+ENICSINFO: This session is running on Hostname : ip-10-70-140-38.il-central-1.compute.internal
+ENICSINFO: The log file is genus.log1 and the command file is genus.cmd1
+ENICSINFO: ----------------------------------
+@file(genus.tcl) 20: source ../inputs/$design(TOPLEVEL).defines -quiet
+#@ End verbose source ../scripts/genus.tcl
+wrong # args: should be "set varName ?newValue?"
+@genus:root: 5> source ../scripts/genus.tcl
+Sourcing '../scripts/genus.tcl' (Tue Jan 21 15:53:15 UTC 2025)...
+#@ Begin verbose source ../scripts/genus.tcl
+@file(genus.tcl) 2: set debug_file "debug.txt"
+@file(genus.tcl) 3: set design(TOPLEVEL) "lp_riscv_top"
+@file(genus.tcl) 4: set runtype "synthesis"
+@file(genus.tcl) 7: set mmmc_or_simple "simple"; # "simple" - using "read_libs"
+@file(genus.tcl) 9: set phys_synth_type "none" ;  # "none"   - don't read any physical data
+@file(genus.tcl) 15: source ../scripts/procedures.tcl -quiet
+@file(genus.tcl) 17: enics_start_stage "start"
+*****************************************
+*****************************************
+**   ENICSINFO: Starting stage start   **
+*****************************************
+*****************************************
+ENICSINFO: Current time is: 21/01/2025 15:53
+ENICSINFO: This session is running on Hostname : ip-10-70-140-38.il-central-1.compute.internal
+ENICSINFO: The log file is genus.log1 and the command file is genus.cmd1
+ENICSINFO: ----------------------------------
+@file(genus.tcl) 20: source ../inputs/$design(TOPLEVEL).defines -quiet
+#@ End verbose source ../scripts/genus.tcl
+wrong # args: should be "set varName ?newValue?"
+@genus:root: 6> source ../scripts/genus.tcl
+Sourcing '../scripts/genus.tcl' (Tue Jan 21 15:53:17 UTC 2025)...
+#@ Begin verbose source ../scripts/genus.tcl
+@file(genus.tcl) 2: set debug_file "debug.txt"
+@file(genus.tcl) 3: set design(TOPLEVEL) "lp_riscv_top"
+@file(genus.tcl) 4: set runtype "synthesis"
+@file(genus.tcl) 7: set mmmc_or_simple "simple"; # "simple" - using "read_libs"
+@file(genus.tcl) 9: set phys_synth_type "none" ;  # "none"   - don't read any physical data
+@file(genus.tcl) 15: source ../scripts/procedures.tcl -quiet
+@file(genus.tcl) 17: enics_start_stage "start"
+*****************************************
+*****************************************
+**   ENICSINFO: Starting stage start   **
+*****************************************
+*****************************************
+ENICSINFO: Current time is: 21/01/2025 15:53
+ENICSINFO: This session is running on Hostname : ip-10-70-140-38.il-central-1.compute.internal
+ENICSINFO: The log file is genus.log1 and the command file is genus.cmd1
+ENICSINFO: ----------------------------------
+@file(genus.tcl) 20: source ../inputs/$design(TOPLEVEL).defines -quiet
+#@ End verbose source ../scripts/genus.tcl
+wrong # args: should be "set varName ?newValue?"

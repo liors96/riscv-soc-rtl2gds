@@ -1,0 +1,1 @@
+/project/tsmc65/users/liosky/ws/DVD25/hw7/inputs/lp_riscv_top.sdc

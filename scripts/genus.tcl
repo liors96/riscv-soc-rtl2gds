@@ -4,9 +4,9 @@ set design(TOPLEVEL) "lp_riscv_top"
 set runtype "synthesis"
 
 # Variables
-set mmmc_or_simple "simple"; # "simple" - using "read_libs"
+set mmmc_or_simple "mmmc"; # "simple" - using "read_libs"
                              # "mmmc"   - using "read_mmmc"
-set phys_synth_type "none" ;  # "none"   - don't read any physical data
+set phys_synth_type "lef" ;  # "none"   - don't read any physical data
                              # "lef"    - only read lef and qrctech files
                              # "floorplan"    - read in a def of the floorplan
 

@@ -1,0 +1,43 @@
+catch { setDesignMode -process 65 }
+catch { setAnalysisMode -analysisType onChipVariation }
+catch { setAnalysisMode -cppr both }
+catch { setOptMode -fixFanoutLoad true }
+catch { setOptMode -timeDesignCompressReports false }
+catch { setOptMode -timeDesignExpandedView true }
+catch { setOptMode -timeDesignNumPaths 10 }
+catch { setOptMode -timeDesignReportNet false }
+catch { setOptMode -verbose true }
+catch { setPathGroupOptions reg2reg -effortLevel high -weight 2 }
+catch { setPathGroupOptions reg2out -effortLevel low }
+catch { setPathGroupOptions reg2cgate -effortLevel high -weight 1 }
+catch { setPathGroupOptions in2reg -effortLevel low }
+catch { setPathGroupOptions in2out -effortLevel low }
+catch { setExtractRCMode  -effortLevel medium -engine postRoute -total_c_th 5 -relative_c_th 0.03 -coupling_c_th 3 }
+catch {setNanoRouteMode -quiet -routeWithViaInPin "true"}
+
+catch { setPlaceMode -place_global_cong_effort auto }
+catch { setScanReorderMode -allowSwapping true }
+catch { setIlmMode -keepHighFanoutPorts true -keepLoopBack false -keepInstInSdc false -keepFlatten true }
+catch { set_well_tap_mode -cell FILLTIE2_A9TR }
+catch { set_well_tap_mode -rule 20 }
+catch { setDelayCalMode -engine aae }
+catch { setDelayCalMode -equivalent_waveform_model propagation }
+catch { setDelayCalMode -SIAware true }
+catch { setImportMode -discardFloatingVNets false }
+catch { setImportMode -keepEmptyModule true }
+catch { setTieHiLoMode -cell {{TIEHI_X1M_A9TR TIELO_X1M_A9TR}} }
+catch { setTieHiLoMode -maxDistance 19 }
+catch { setTieHiLoMode -maxFanout 19 }
+catch { setTieHiLoMode -prefix TIE }
+catch { setSIMode -enable_glitch_report true }
+catch { setSIMode -separate_delta_delay_on_data true }
+catch { setEndCapMode -boundary_tap true }
+catch { setEndCapMode -leftEdge ENDCAPTIE2_A9TR }
+catch { setEndCapMode -prefix ENDCAP }
+catch { setEndCapMode -rightEdge ENDCAPTIE2_A9TR }
+catch { setFillerMode -core {FILLCAP128_A9TR FILLCAP65_A9TR FILLCAP32_A9TR FILLCAP17_A9TR FILLCAP8_A9TR FILLCAP6_A9TR FILL128_A9TR FILL64_A9TR FILL32_A9TR FILL16_A9TR FILL8_A9TR FILL4_A9TR FILL2_A9TR FILL1_A9TR} }
+catch { setFillerMode -corePrefix FILLDECAP }
+catch { setFPlanMode -defaultTechSite sc9_cln65lp }
+catch { setFPlanMode -maxIoHeight false }
+catch { setFPlanMode -place_check_ignore_fixed_cell_list {} }
+catch { setFPlanMode -powerRailLayer {} }

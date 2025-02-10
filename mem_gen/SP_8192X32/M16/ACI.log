@@ -1,0 +1,38 @@
+Spreadsheet updated
+ARM Physical IP, Inc.
+Amazon Linux release 2 (Karoo)
+Linux ip-10-70-140-38.il-central-1.compute.internal 4.14.355-275.570.amzn2.x86_64 #1 SMP Sat Nov 30 09:51:35 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+Compiler version r1p0
+GUI version 8.2.7
+
+
+CONFIDENTIAL AND PROPRIETARY SOFTWARE OF ARM PHYSICAL IP, INC.
+
+Copyright (c) 1993 - 2025 ARM Physical IP, Inc.  All Rights Reserved.
+
+Use of this Software is subject to the terms and conditions of the
+applicable license agreement with ARM Physical IP, Inc. 
+In addition, this Software is protected by patents, copyright law 
+and international treaties.
+
+The copyright notice(s) in this Software does not indicate actual or
+intended publication of this Software.
+
+
+High Speed Single Port SRAM HVT RVT Compiler, TSMC cln65lp 65nm Process, 0.620um^2 Bit Cell
+Log file is ACI.log
+
+Spreadsheet updated
+cmd: /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp/sram_sp_hse_hvt_rvt/r1p0/bin/sram_sp_hse_hvt_rvt lef-fp -name_case upper -mvt "" -ser none -bus_notation on -site_def off -check_instname on -frequency 1.0 -bmux off -diodes on -activity_factor 50 -words 8192 -drive 6 -power_type otc -bits 32 -instname sp_hse_8192_m16 -retention on -libertyviewstyle nldm -write_mask on -left_bus_delim "[" -right_bus_delim "]" -pwr_gnd_rename vddpe:VDDPE,vddce:VDDCE,vsse:VSSE -rows_p_bl 64 -wp_size 1 -libname USERLIB -write_thru off -cust_comment "" -prefix "" -mux 16 -top_layer m5-m10 -back_biasing off -ema on -corners ff_1p32v_1p32v_125c,ff_1p32v_1p32v_m40c,ss_1p08v_1p08v_125c,ss_1p08v_1p08v_m40c,tt_1p20v_1p20v_25c
+Setting writeMask option
+lef-fp generator succeeded, created: sp_hse_8192_m16.lef
+cmd: /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp/sram_sp_hse_hvt_rvt/r1p0/bin/sram_sp_hse_hvt_rvt liberty -name_case upper -mvt "" -ser none -bus_notation on -site_def off -check_instname on -frequency 1.0 -bmux off -diodes on -activity_factor 50 -words 8192 -drive 6 -power_type otc -bits 32 -instname sp_hse_8192_m16 -retention on -libertyviewstyle nldm -write_mask on -left_bus_delim "[" -right_bus_delim "]" -pwr_gnd_rename vddpe:VDDPE,vddce:VDDCE,vsse:VSSE -rows_p_bl 64 -wp_size 1 -libname USERLIB -write_thru off -cust_comment "" -prefix "" -mux 16 -top_layer m5-m10 -back_biasing off -ema on -corners ff_1p32v_1p32v_125c,ff_1p32v_1p32v_m40c,ss_1p08v_1p08v_125c,ss_1p08v_1p08v_m40c,tt_1p20v_1p20v_25c
+Setting writeMask option
+liberty generator succeeded, created:
+   sp_hse_8192_m16_ff_1p32v_1p32v_125c.lib
+   sp_hse_8192_m16_ff_1p32v_1p32v_m40c.lib
+   sp_hse_8192_m16_ss_1p08v_1p08v_125c.lib
+   sp_hse_8192_m16_ss_1p08v_1p08v_m40c.lib
+   sp_hse_8192_m16_tt_1p20v_1p20v_25c.lib
+cmd: /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp/sram_sp_hse_hvt_rvt/r1p0/bin/sram_sp_hse_hvt_rvt verilog -name_case upper -mvt "" -ser none -bus_notation on -site_def off -check_instname on -frequency 1.0 -bmux off -diodes on -activity_factor 50 -words 8192 -drive 6 -power_type otc -bits 32 -instname sp_hse_8192_m16 -retention on -libertyviewstyle nldm -write_mask on -left_bus_delim "[" -right_bus_delim "]" -pwr_gnd_rename vddpe:VDDPE,vddce:VDDCE,vsse:VSSE -rows_p_bl 64 -wp_size 1 -libname USERLIB -write_thru off -cust_comment "" -prefix "" -mux 16 -top_layer m5-m10 -back_biasing off -ema on -corners ff_1p32v_1p32v_125c,ff_1p32v_1p32v_m40c,ss_1p08v_1p08v_125c,ss_1p08v_1p08v_m40c,tt_1p20v_1p20v_25c
+verilog generator succeeded, created: sp_hse_8192_m16.v

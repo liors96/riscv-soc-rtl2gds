@@ -123,15 +123,16 @@ source ../inputs/$design(TOPLEVEL).floorplan.defines -quiet
 
 
 # Specify Floorpan
-create_floorplan \
-    -core_size [list 2500.0 1500.0 150.0 150.0 150.0 150.0] \
-    -core_margins_by die \
-    -flip s \
-    -match_to_site
-
-# create_floorplan -site $tech(STANDARD_CELL_SITE) -match_to_site \
-#     -core_density_size $design(floorplan_ratio) $design(floorplan_utilization) {*}$design(floorplan_space_to_core)
+#create_floorplan \
+ #   -core_size [list 3000.0 3000.0 300.0 300.0 300.0 300.0] \
+  #  -core_margins_by die \
+   # -flip s \
+    #-match_to_site
+create_floorplan -site $tech(STANDARD_CELL_SITE) -match_to_site \
+    -core_size [list 1200 1000] \
+    -flip s
 gui_fit
+
 
 # Set up pads (for fullchip) or pins (for macro)
 if {$design(FULLCHIP_OR_MACRO)=="FULLCHIP"} {
@@ -141,8 +142,8 @@ if {$design(FULLCHIP_OR_MACRO)=="FULLCHIP"} {
 	# Add IO Fillers
 	add_io_fillers -cells $tech(IO_FILLERS) -prefix IOFILLER
 	# Connect Pad Rings
-	#route_special -connect {pad_ring} \
-	#	-nets "$design(digital_gnd) $design(digital_vdd) $design(io_gnd) $design(io_vdd)"
+	route_special -connect {pad_ring} \
+		-nets "$design(digital_gnd) $design(digital_vdd) $design(io_gnd) $design(io_vdd)"
 } elseif {$design(FULLCHIP_OR_MACRO)=="MACRO"} {
 	enics_message "Spreading Pins around Macro" medium
     # Spread pins
@@ -175,29 +176,43 @@ enics_message "Placing Hard Macros" medium
 #    Syntax: { ref_edge offset target_edge }
 delete_relative_floorplan -all
 
-set imem0_name [get_db [get_db insts $design(imem0)] .name]
-# Place the imem0 macro 25u from the bottom and 25u from the left of the core boundary
+set imem0_name [get_db [get_db insts -regexp $design(imem0)] .name]
+set imem1_name [get_db [get_db insts -regexp $design(imem1)] .name]
 create_relative_floorplan -ref_type core_boundary -ref $design(TOPLEVEL) -place $imem0_name \
-    -horizontal_edge_separate {0  25  0} \
-    -vertical_edge_separate {1  25  1} -orient MX
+         -horizontal_edge_separate [list 1 [expr -485*$tech(row_height)] 1] \
+        -vertical_edge_separate [list 0 25 0] -orient MX
 
-set imem1_name [get_db [get_db insts $design(imem1)] .name]
-# Place the imem1 macro 25u above imem0
 create_relative_floorplan -ref_type core_boundary -ref $design(TOPLEVEL) -place $imem1_name \
-         -horizontal_edge_separate { 1 -25 1 } \
-         -vertical_edge_separate { 1 25 1 } -orient R0
+        -horizontal_edge_separate [list 1 [expr -485*$tech(row_height)] 1] \
+        -vertical_edge_separate {0  700  0} -orient MX
 
 
-# TODO - relative fplan to dmem insts
-set dmem0_name [get_db [get_db insts $design(dmem0)] .name]
-set dmem1_name [get_db [get_db insts $design(dmem1)] .name]
+# Spread dmem macros across top row of core
+set dmem0_name [get_db [get_db insts -regexp $design(dmem0)] .name]
+set dmem1_name [get_db [get_db insts -regexp $design(dmem1)] .name]
+set dmem2_name [get_db [get_db insts -regexp $design(dmem2)] .name]
+set dmem3_name [get_db [get_db insts -regexp $design(dmem3)] .name]
+
+set core_width [expr [get_db designs .core_boundary.perimeter]/(2*(1+$design(floorplan_ratio)))]
+set sram_width [get_db [get_db insts $dmem0_name] .bbox.width]
+set sram_spacing [expr ($core_width-4*$sram_width)/5]
+
 create_relative_floorplan -ref_type core_boundary -ref $design(TOPLEVEL) -place $dmem0_name \
-    -horizontal_edge_separate {0  25  0} \
-    -vertical_edge_separate {2  -25  2} -orient MX
+    -horizontal_edge_separate [list 1 [expr -15*$tech(row_height)] 1] \
+    -vertical_edge_separate [list 0 $sram_spacing 0] -orient R0
 
-create_relative_floorplan -ref_type core_boundary -ref $design(TOPLEVEL) -place $dmem1_name \
-    -horizontal_edge_separate {1  -25  1} \
-    -vertical_edge_separate {2  -25  2} -orient R0
+create_relative_floorplan -ref_type object -ref $dmem0_name -place $dmem1_name \
+    -horizontal_edge_separate {1  0  1} \
+    -vertical_edge_separate [list 2 $sram_spacing 0] -orient R0
+
+create_relative_floorplan -ref_type object -ref $dmem1_name -place $dmem2_name \
+    -horizontal_edge_separate {1  0  1} \
+    -vertical_edge_separate [list 2 $sram_spacing 0] -orient R0
+
+create_relative_floorplan -ref_type object -ref $dmem2_name -place $dmem3_name \
+    -horizontal_edge_separate {1  0  1} \
+    -vertical_edge_separate [list 2 $sram_spacing 0] -orient R0
+
 
 
 
@@ -208,26 +223,38 @@ deselect_obj -all
 select_obj $imem0_name
 add_rings -around selected -type block_rings -nets "$design(digital_gnd) $design(digital_vdd)" \
 	-layer {bottom M1 top M1 right M2 left M2} -width 3 -spacing 0.5
-create_place_halo -halo_deltas {10 10 10 10} -insts $imem0_name -snap_to_site
+create_place_halo -halo_deltas {10.8 10.8 10.8 10.8} -insts $imem0_name -snap_to_site
 
 deselect_obj -all
 select_obj $imem1_name
 add_rings -around selected -type block_rings -nets "$design(digital_gnd) $design(digital_vdd)" \
 	-layer {bottom M1 top M1 right M2 left M2} -width 3 -spacing 0.5
-create_place_halo -halo_deltas {10 10 10 10} -insts $imem1_name -snap_to_site
+create_place_halo -halo_deltas {10.8 10.8 10.8 10.8} -insts $imem1_name -snap_to_site
 
-# TODO - add rings to dmem insts & place halo
 deselect_obj -all
 select_obj $dmem0_name
 add_rings -around selected -type block_rings -nets "$design(digital_gnd) $design(digital_vdd)" \
 	-layer {bottom M1 top M1 right M2 left M2} -width 3 -spacing 0.5
-create_place_halo -halo_deltas {10 10 10 10} -insts $dmem0_name -snap_to_site
+create_place_halo -halo_deltas {10.8 10.8 10.8 10.8} -insts $dmem0_name -snap_to_site
 
 deselect_obj -all
 select_obj $dmem1_name
 add_rings -around selected -type block_rings -nets "$design(digital_gnd) $design(digital_vdd)" \
 	-layer {bottom M1 top M1 right M2 left M2} -width 3 -spacing 0.5
-create_place_halo -halo_deltas {10 10 10 10} -insts $dmem1_name -snap_to_site
+create_place_halo -halo_deltas {10.8 10.8 10.8 10.8} -insts $dmem1_name -snap_to_site
+
+deselect_obj -all
+select_obj $dmem2_name
+add_rings -around selected -type block_rings -nets "$design(digital_gnd) $design(digital_vdd)" \
+	-layer {bottom M1 top M1 right M2 left M2} -width 3 -spacing 0.5
+create_place_halo -halo_deltas {10.8 10.8 10.8 10.8} -insts $dmem2_name -snap_to_site 
+
+deselect_obj -all
+select_obj $dmem3_name
+add_rings -around selected -type block_rings -nets "$design(digital_gnd) $design(digital_vdd)" \
+	-layer {bottom M1 top M1 right M2 left M2} -width 3 -spacing 0.5
+create_place_halo -halo_deltas {10.8 10.8 10.8 10.8} -insts $dmem3_name -snap_to_site
+
 
 # Connect VDD/GND connections on macros to rings
 # NOTE: block_pin = on_boundary flag is required in order to connect to all power pins of the memories. 
@@ -379,9 +406,9 @@ set_db route_design_with_timing_driven true
 set_db route_design_with_si_driven true
 set_db route_design_detail_use_multi_cut_via_effort medium
 
-#route_opt_design
 enics_message "Starting Route Design" medium
-route_design
+route_opt_design
+#route_design
 enics_message "Finished running Route Design"
 
 enics_create_stage_reports -check_drc yes -check_connectivity yes -pop_snapshot yes
@@ -392,7 +419,7 @@ enics_create_stage_reports -check_drc yes -check_connectivity yes -pop_snapshot 
 # -----------------------
 enics_start_stage "post_route_opt"
 opt_design -post_route -setup -hold
-enics_message "Finished post Route hold optimization"
+#enics_message "Finished post Route hold optimization"
 
 enics_message "Running Post Route DFM Optimizations" medium
 set_db route_design_with_timing_driven false

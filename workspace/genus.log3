@@ -1,0 +1,127 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2022 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[16:23:31.019841] Configured Lic search path (21.01-s002): 5280@ip-10-70-133-150.il-central-1.compute.internal
+
+Version: 21.15-s080_1, built Fri Sep 23 05:57:55 PDT 2022
+Options: 
+Date:    Tue Jan 21 16:23:31 2025
+Host:    ip-10-70-140-38.il-central-1.compute.internal (x86_64 w/Linux 4.14.355-275.570.amzn2.x86_64) (1core*2cpus*1physical cpu*Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz 55296KB) (8009452KB)
+PID:     27672
+OS:      CentOS Linux release 7.9.2009 (Core)
+
+*** Stack limited to 512 MB. This run may fail due to lack of stack space. ***
+
+
+[16:23:31.308739] Periodic Lic check successful
+[16:23:31.308752] Feature usage summary:
+[16:23:31.308753] Genus_Synthesis
+Checking out license: Genus_Synthesis
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Loading tool scripts...
+Finished loading tool scripts (9 seconds elapsed).
+
+WARNING: This version of the tool is 851 days old.
+@genus:root: 1> source ../scripts/genus.tcl
+Sourcing '../scripts/genus.tcl' (Tue Jan 21 16:25:27 UTC 2025)...
+#@ Begin verbose source ../scripts/genus.tcl
+@file(genus.tcl) 2: set debug_file "debug.txt"
+@file(genus.tcl) 3: set design(TOPLEVEL) "lp_riscv_top"
+@file(genus.tcl) 4: set runtype "synthesis"
+@file(genus.tcl) 7: set mmmc_or_simple "simple"; # "simple" - using "read_libs"
+@file(genus.tcl) 9: set phys_synth_type "none" ;  # "none"   - don't read any physical data
+@file(genus.tcl) 15: source ../scripts/procedures.tcl -quiet
+@file(genus.tcl) 17: enics_start_stage "start"
+*****************************************
+*****************************************
+**   ENICSINFO: Starting stage start   **
+*****************************************
+*****************************************
+ENICSINFO: Current time is: 21/01/2025 16:25
+ENICSINFO: This session is running on Hostname : ip-10-70-140-38.il-central-1.compute.internal
+ENICSINFO: The log file is genus.log3 and the command file is genus.cmd3
+ENICSINFO: ----------------------------------
+@file(genus.tcl) 20: source ../inputs/$design(TOPLEVEL).defines -quiet
+@file(genus.tcl) 23: source ../scripts/settings.tcl -quiet
+  Setting attribute of root '/': 'source_verbose' = true
+  Setting attribute of root '/': 'information_level' = 9
+  Setting attribute of root '/': 'lp_insert_clock_gating' = true
+  Setting attribute of root '/': 'detailed_sdc_messages' = true
+@file(genus.tcl) 26: source ../libraries/libraries.$TECHNOLOGY.tcl -quiet
+  Setting attribute of root '/': 'design_process_node' = 65
+@file(genus.tcl) 27: source ../libraries/libraries.$SC_TECHNOLOGY.tcl -quiet
+  Setting attribute of root '/': 'route_design_with_via_in_pin' = true
+@file(genus.tcl) 28: source ../libraries/libraries.$SRAM_TECHNOLOGY.tcl -quiet
+@file(genus.tcl) 29: if {$design(FULLCHIP_OR_MACRO)=="FULLCHIP"} {
+    source ../libraries/libraries.$IO_TECHNOLOGY.tcl -quiet
+}
+@file(genus.tcl) 37: set var_list {runtype mmmc_or_simple phys_synth_type}
+@file(genus.tcl) 38: set dic_list {paths tech tech_files design}
+@file(genus.tcl) 39: enics_print_debug_data w $debug_file "after everything was loaded" $var_list $dic_list
+@file(genus.tcl) 44: enics_start_stage "init_design"
+***********************************************
+***********************************************
+**   ENICSINFO: Starting stage init_design   **
+***********************************************
+***********************************************
+ENICSINFO: Current time is: 21/01/2025 16:25
+ENICSINFO: ----------------------------------
+@file(genus.tcl) 47: enics_message "Suppressing the following messages that are reported due to the library definitions:" 
+ENICSINFO: Suppressing the following messages that are reported due to the library definitions:
+@file(genus.tcl) 48: enics_message "$tech(LIB_SUPPRESS_MESSAGES_GENUS)"
+ENICSINFO: LBR-9 LBR-76 LBR-40 LBR-436 LBR-170 LBR-415 LBR-41 LBR-72 LBR-518 LBR-518 WSDF-201
+@file(genus.tcl) 49: suppress_messages $tech(LIB_SUPPRESS_MESSAGES_GENUS)
+  Setting attribute of message 'LBR-9': 'max_print' = 0
+  Setting attribute of message 'LBR-76': 'max_print' = 0
+  Setting attribute of message 'LBR-40': 'max_print' = 0
+  Setting attribute of message 'LBR-436': 'max_print' = 0
+  Setting attribute of message 'LBR-170': 'max_print' = 0
+  Setting attribute of message 'LBR-415': 'max_print' = 0
+  Setting attribute of message 'LBR-41': 'max_print' = 0
+  Setting attribute of message 'LBR-72': 'max_print' = 0
+  Setting attribute of message 'LBR-518': 'max_print' = 0
+  Setting attribute of message 'LBR-518': 'max_print' = 0
+  Setting attribute of message 'WSDF-201': 'max_print' = 0
+@file(genus.tcl) 51: if {$mmmc_or_simple=="mmmc"} {
+    enics_message "Loading MMMC File"
+    read_mmmc $design(mmmc_view_file)
+} else {
+    enics_message "Reading library definitions (without MMMC Flow)"
+    set_db init_lib_search_path $paths(LIB_paths) 
+    suppress_messages $tech(LIB_SUPPRESS_MESSAGES_GENUS)
+    suppress_messages "LBR-38"; # A message that shouldn't appear in MMMC Flow
+    read_libs $tech_files(ALL_WC_LIBS)
+}
+ENICSINFO: Reading library definitions (without MMMC Flow)
+  Setting attribute of root '/': 'init_lib_search_path' = /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_rvt/r0p0/lib/ /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_lvt/r0p0/lib/ /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_hvt/r0p0/lib/
+  Setting attribute of message 'LBR-9': 'max_print' = 0
+  Setting attribute of message 'LBR-76': 'max_print' = 0
+  Setting attribute of message 'LBR-40': 'max_print' = 0
+  Setting attribute of message 'LBR-436': 'max_print' = 0
+  Setting attribute of message 'LBR-170': 'max_print' = 0
+  Setting attribute of message 'LBR-415': 'max_print' = 0
+  Setting attribute of message 'LBR-41': 'max_print' = 0
+  Setting attribute of message 'LBR-72': 'max_print' = 0
+  Setting attribute of message 'LBR-518': 'max_print' = 0
+  Setting attribute of message 'LBR-518': 'max_print' = 0
+  Setting attribute of message 'WSDF-201': 'max_print' = 0
+  Setting attribute of message 'LBR-38': 'max_print' = 0
+Error   : File error. [FILE-100] [::legacy::set_attribute]
+        : Cannot open file '../mem_gen/SP_8192X32/M16/sp_hse_8192_m16_ss_1p08v_1p08v_125c.lib'
+        : Make sure that the file is a readable regular file and has the specified name.
+Error   : A library file does not exist. [LBR-68] [::legacy::set_attribute]
+        : File '../mem_gen/SP_8192X32/M16/sp_hse_8192_m16_ss_1p08v_1p08v_125c.lib' could not be found. File '<none>' was the last file that was successfully read in.
+        : Make sure that the library file exists or check for a typo in the file name.
+Error   : The data value for this attribute is invalid. [TUI-24] [::legacy::set_attribute]
+        : The value '  { /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_rvt/r0p0/lib/sc9_cln65lp_base_rvt_ss_typical_max_0p90v_125c.lib }  { /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_lvt/r0p0/lib/sc9_cln65lp_base_lvt_ss_typical_max_0p90v_125c.lib }  { /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_hvt/r0p0/lib/sc9_cln65lp_base_hvt_ss_typical_max_0p90v_125c.lib }  { ../mem_gen/SP_8192X32/M16/sp_hse_8192_m16_ss_1p08v_1p08v_125c.lib }  { ../mem_gen/SP_16384X32/M16/sp_hde_16384_m16_ss_1p08v_1p08v_125c.lib }  { /data/tsmc/65LP/dig_libs/ARM_FEONLY/TSMCHOME_fe/digital/Front_End/timing_power_noise/NLDM/tpdn65lpnv2od3_200a/tpdn65lpnv2od3wc.lib } ' cannot be set for attribute 'library'.
+        : To see the usage/description for this attribute, type '::legacy::set_attribute -h <attr_name> *' (in legacy UI mode) or 'help * <attr_name> -detail' (in CUI mode).
+#@ End verbose source ../scripts/genus.tcl
+1

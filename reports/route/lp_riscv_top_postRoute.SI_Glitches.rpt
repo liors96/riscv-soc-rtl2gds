@@ -1,0 +1,5 @@
+NetName                                 vlPeak      vlView              vhPeak      vhView              
+#
+lp_riscv/placement_opt_inst_FE_OFN4440_n_10798  0.0513  wc_analysis_view -0.0405  wc_analysis_view
+
+Total number of glitch violations: 1

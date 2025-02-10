@@ -12,7 +12,7 @@ module sram_sp_instr_wrap #( parameter INSTR_RDATA_WIDTH = 32) (
    wire [31:0] instr_rdata_i_0;
    wire [31:0] instr_rdata_i_1;       
 
-   sram_sp_16384x32_m32_be_wrap 
+   sram_sp_16384x32_m16_be_wrap 
      iccm_ram_0 (
                  .CLK(clk),     
                  .CEN(!(instr_req_i && !instr_addr_i[16])), 
@@ -23,7 +23,7 @@ module sram_sp_instr_wrap #( parameter INSTR_RDATA_WIDTH = 32) (
                  .Q(instr_rdata_i_0)                                 
                  );
 
-   sram_sp_16384x32_m32_be_wrap 
+   sram_sp_16384x32_m16_be_wrap 
      iccm_ram_1 (
                  .CLK(clk),     
                  .CEN(!(instr_req_i && instr_addr_i[16])), 

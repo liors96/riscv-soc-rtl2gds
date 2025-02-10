@@ -1,0 +1,10 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-sv
+-DELAY_TRIGGER
+-DEFINE
+RTL
+-INCDIR
+../sourcecode/rtl/riscv-master/include/

@@ -1,0 +1,442 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2022 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[15:18:39.019929] Configured Lic search path (21.01-s002): 5280@ip-10-70-133-150.il-central-1.compute.internal
+
+Version: 21.15-s080_1, built Fri Sep 23 05:57:55 PDT 2022
+Options: -files scripts/genus.tcl 
+Date:    Tue Jan 21 15:18:39 2025
+Host:    ip-10-70-140-38.il-central-1.compute.internal (x86_64 w/Linux 4.14.355-275.570.amzn2.x86_64) (1core*2cpus*1physical cpu*Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz 55296KB) (8009452KB)
+PID:     21047
+OS:      CentOS Linux release 7.9.2009 (Core)
+
+*** Stack limited to 512 MB. This run may fail due to lack of stack space. ***
+
+
+[15:18:39.148209] Periodic Lic check successful
+[15:18:39.148224] Feature usage summary:
+[15:18:39.148224] Genus_Synthesis
+Checking out license: Genus_Synthesis
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Loading tool scripts...
+Finished loading tool scripts (8 seconds elapsed).
+
+#@ Processing -files option
+@genus 1> source scripts/genus.tcl
+File 'scripts/genus.tcl' does not exist.
+Encountered problems processing file: scripts/genus.tcl
+WARNING: This version of the tool is 851 days old.
+@genus:root: 2> #ORIGINAL set design(TOPLEVEL) "<your_DUT_name>"
+@genus:root: 3> set debug_file "debug.txt"
+debug.txt
+@genus:root: 4> set design(TOPLEVEL) "lp_riscv_top"
+lp_riscv_top
+@genus:root: 5> set runtype "synthesis"
+synthesis
+@genus:root: 6> 
+@genus:root: 6> # Variables
+@genus:root: 7> set mmmc_or_simple "simple"; # "simple" - using "read_libs"
+simple
+@genus:root: 8> # "mmmc"   - using "read_mmmc"
+@genus:root: 9> set phys_synth_type "none" ;  # "none"   - don't read any physical data
+none
+@genus:root: 10> # "lef"    - only read lef and qrctech files
+@genus:root: 11> # "floorplan"    - read in a def of the floorplan
+@genus:root: 12> 
+@genus:root: 12> 
+@genus:root: 12> # Load general procedures
+@genus:root: 13> source ../scripts/procedures.tcl -quiet
+@genus:root: 14> 
+@genus:root: 14> enics_start_stage "start"
+*****************************************
+*****************************************
+**   ENICSINFO: Starting stage start   **
+*****************************************
+*****************************************
+ENICSINFO: Current time is: 21/01/2025 15:19
+ENICSINFO: This session is running on Hostname : ip-10-70-140-38.il-central-1.compute.internal
+ENICSINFO: The log file is genus.log and the command file is genus.cmd
+ENICSINFO: ----------------------------------
+@genus:root: 15> 
+@genus:root: 15> # Load the specific definitions for this project
+@genus:root: 16> source ../inputs/$design(TOPLEVEL).defines -quiet
+wrong # args: should be "set varName ?newValue?"
+@genus:root: 17> 
+@genus:root: 17> # Load general settings
+@genus:root: 18> source ../scripts/settings.tcl -quiet
+  Setting attribute of root '/': 'source_verbose' = true
+  Setting attribute of root '/': 'information_level' = 9
+  Setting attribute of root '/': 'lp_insert_clock_gating' = true
+  Setting attribute of root '/': 'detailed_sdc_messages' = true
+@genus:root: 19> 
+@genus:root: 19> # Load the library paths and definitions for this technology
+@genus:root: 20> source ../libraries/libraries.$TECHNOLOGY.tcl -quiet
+  Setting attribute of root '/': 'design_process_node' = 65
+@genus:root: 21> source ../libraries/libraries.$SC_TECHNOLOGY.tcl -quiet
+  Setting attribute of root '/': 'route_design_with_via_in_pin' = true
+@genus:root: 22> source ../libraries/libraries.$SRAM_TECHNOLOGY.tcl -quiet
+@genus:root: 23> if {$design(FULLCHIP_OR_MACRO)=="FULLCHIP"} {
+    source ../libraries/libraries.$IO_TECHNOLOGY.tcl -quiet
+}
+@genus:root: 24> 
+@genus:root: 24> 
+@genus:root: 24> #############################################
+@genus:root: 25> #       Print values to debug file
+@genus:root: 26> #############################################
+@genus:root: 27> set var_list {runtype mmmc_or_simple phys_synth_type}
+runtype mmmc_or_simple phys_synth_type
+@genus:root: 28> set dic_list {paths tech tech_files design}
+paths tech tech_files design
+@genus:root: 29> enics_print_debug_data w $debug_file "after everything was loaded" $var_list $dic_list
+@genus:root: 30> 
+@genus:root: 30> ##########################
+@genus:root: 31> # Read Libraries
+@genus:root: 32> ##########################
+@genus:root: 33> enics_start_stage "init_design"
+***********************************************
+***********************************************
+**   ENICSINFO: Starting stage init_design   **
+***********************************************
+***********************************************
+ENICSINFO: Current time is: 21/01/2025 15:19
+ENICSINFO: ----------------------------------
+@genus:root: 34> 
+@genus:root: 34> # Suppress messages
+@genus:root: 35> enics_message "Suppressing the following messages that are reported due to the library definitions:"
+ENICSINFO: Suppressing the following messages that are reported due to the library definitions:
+@genus:root: 36> enics_message "$tech(LIB_SUPPRESS_MESSAGES_GENUS)"
+ENICSINFO: LBR-9 LBR-76 LBR-40 LBR-436 LBR-170 LBR-415 LBR-41 LBR-72 LBR-518 LBR-518 WSDF-201
+@genus:root: 37> suppress_messages $tech(LIB_SUPPRESS_MESSAGES_GENUS)
+  Setting attribute of message 'LBR-9': 'max_print' = 0
+  Setting attribute of message 'LBR-76': 'max_print' = 0
+  Setting attribute of message 'LBR-40': 'max_print' = 0
+  Setting attribute of message 'LBR-436': 'max_print' = 0
+  Setting attribute of message 'LBR-170': 'max_print' = 0
+  Setting attribute of message 'LBR-415': 'max_print' = 0
+  Setting attribute of message 'LBR-41': 'max_print' = 0
+  Setting attribute of message 'LBR-72': 'max_print' = 0
+  Setting attribute of message 'LBR-518': 'max_print' = 0
+  Setting attribute of message 'LBR-518': 'max_print' = 0
+  Setting attribute of message 'WSDF-201': 'max_print' = 0
+@genus:root: 38> 
+@genus:root: 38> if {$mmmc_or_simple=="mmmc"} {
+    enics_message "Loading MMMC File"
+    read_mmmc $design(mmmc_view_file)
+} else {
+    enics_message "Reading library definitions (without MMMC Flow)"
+    set_db init_lib_search_path $paths(LIB_paths) 
+    suppress_messages $tech(LIB_SUPPRESS_MESSAGES_GENUS)
+    suppress_messages "LBR-38"; # A message that shouldn't appear in MMMC Flow
+    read_libs $tech_files(ALL_WC_LIBS)
+}
+ENICSINFO: Reading library definitions (without MMMC Flow)
+  Setting attribute of root '/': 'init_lib_search_path' = /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_rvt/r0p0/lib/ /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_lvt/r0p0/lib/ /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_hvt/r0p0/lib/
+  Setting attribute of message 'LBR-9': 'max_print' = 0
+  Setting attribute of message 'LBR-76': 'max_print' = 0
+  Setting attribute of message 'LBR-40': 'max_print' = 0
+  Setting attribute of message 'LBR-436': 'max_print' = 0
+  Setting attribute of message 'LBR-170': 'max_print' = 0
+  Setting attribute of message 'LBR-415': 'max_print' = 0
+  Setting attribute of message 'LBR-41': 'max_print' = 0
+  Setting attribute of message 'LBR-72': 'max_print' = 0
+  Setting attribute of message 'LBR-518': 'max_print' = 0
+  Setting attribute of message 'LBR-518': 'max_print' = 0
+  Setting attribute of message 'WSDF-201': 'max_print' = 0
+  Setting attribute of message 'LBR-38': 'max_print' = 0
+Error   : File error. [FILE-100] [::legacy::set_attribute]
+        : Cannot open file '../mem_gen/SP_8192X32/M16/sp_hse_8192_m16_ss_1p08v_1p08v_125c.lib'
+        : Make sure that the file is a readable regular file and has the specified name.
+Error   : A library file does not exist. [LBR-68] [::legacy::set_attribute]
+        : File '../mem_gen/SP_8192X32/M16/sp_hse_8192_m16_ss_1p08v_1p08v_125c.lib' could not be found. File '<none>' was the last file that was successfully read in.
+        : Make sure that the library file exists or check for a typo in the file name.
+Error   : The data value for this attribute is invalid. [TUI-24] [::legacy::set_attribute]
+        : The value '  { /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_rvt/r0p0/lib/sc9_cln65lp_base_rvt_ss_typical_max_0p90v_125c.lib }  { /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_lvt/r0p0/lib/sc9_cln65lp_base_lvt_ss_typical_max_0p90v_125c.lib }  { /data/tsmc/65LP/dig_libs/ARM_FEONLY/arm/tsmc/cln65lp//sc9_base_hvt/r0p0/lib/sc9_cln65lp_base_hvt_ss_typical_max_0p90v_125c.lib }  { ../mem_gen/SP_8192X32/M16/sp_hse_8192_m16_ss_1p08v_1p08v_125c.lib }  { ../mem_gen/SP_16384X32/M16/sp_hde_16384_m16_ss_1p08v_1p08v_125c.lib }  { /data/tsmc/65LP/dig_libs/ARM_FEONLY/TSMCHOME_fe/digital/Front_End/timing_power_noise/NLDM/tpdn65lpnv2od3_200a/tpdn65lpnv2od3wc.lib } ' cannot be set for attribute 'library'.
+        : To see the usage/description for this attribute, type '::legacy::set_attribute -h <attr_name> *' (in legacy UI mode) or 'help * <attr_name> -detail' (in CUI mode).
+1
+@genus:root: 39> 
+@genus:root: 39> 
+@genus:root: 39> ############################
+@genus:root: 40> # Physical Synthesis Setup
+@genus:root: 41> ############################
+@genus:root: 42> if {$phys_synth_type == "none"} {
+   enics_message "Physical Synthesis is disabled"
+   #read_qrc $tech_files(QRCTECH_FILE_WC)
+} else {
+    # Suppress messages
+    enics_message "Suppressing the following messages that are reported due to the LEF definitions:" 
+    enics_message "$tech(LEF_SUPPRESS_MESSAGES_GENUS)"
+    suppress_messages $tech(LEF_SUPPRESS_MESSAGES_GENUS)
+    enics_message "Loading the library abstracts"
+    read_physical -lef $tech_files(ALL_LEFS)
+    if {$phys_synth_type == "floorplan"} { 
+        # You need to read a .def file for the floorplan to enable physical synthesis 
+        enics_message "Loading the floorplan def"
+        read_def $design(floorplan_def)
+    }
+}
+ENICSINFO: Physical Synthesis is disabled
+@genus:root: 43> 
+@genus:root: 43> enics_message "Suppressing the following messages that are design specific"
+ENICSINFO: Suppressing the following messages that are design specific
+@genus:root: 44> enics_message "$design(DESIGN_SUPPRESS_MESSAGES_GENUS)"
+can't read "design(DESIGN_SUPPRESS_MESSAGES_GENUS)": no such element in array
+@genus:root: 45> suppress_messages $design(DESIGN_SUPPRESS_MESSAGES_GENUS)
+can't read "design(DESIGN_SUPPRESS_MESSAGES_GENUS)": no such element in array
+@genus:root: 46> 
+@genus:root: 46> ##########################
+@genus:root: 47> # Read RTL
+@genus:root: 48> ##########################
+@genus:root: 49> enics_start_stage "read_rtl"
+********************************************
+********************************************
+**   ENICSINFO: Starting stage read_rtl   **
+********************************************
+********************************************
+ENICSINFO: Current time is: 21/01/2025 15:19
+ENICSINFO: ----------------------------------
+@genus:root: 50> 
+@genus:root: 50> set_db init_hdl_search_path $design(hdl_search_paths)
+can't read "design(hdl_search_paths)": no such element in array
+@genus:root: 51> read_hdl -language sv -f $design(read_hdl_list)
+can't read "design(read_hdl_list)": no such element in array
+@genus:root: 52> 
+@genus:root: 52> if {$mmmc_or_simple=="mmmc"} {
+    enics_message "Running init_design in an MMMC flow"
+    init_design
+}
+@genus:root: 53> 
+@genus:root: 53> ##########################
+@genus:root: 54> # Elaborate
+@genus:root: 55> ##########################
+@genus:root: 56> enics_start_stage "elaborate"
+*********************************************
+*********************************************
+**   ENICSINFO: Starting stage elaborate   **
+*********************************************
+*********************************************
+ENICSINFO: Current time is: 21/01/2025 15:19
+ENICSINFO: ----------------------------------
+@genus:root: 57> elaborate $design(TOPLEVEL) ;#-update
+Error   : Failed to execute command. [LBR-163] [elaborate]
+        : No target technology library was loaded.
+        : Specify libraries using read_libs or read_mmmc.
+UM:   flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   elaborate
+1
+@genus:root: 58> 
+@genus:root: 58> enics_start_stage "post_elaboration"
+****************************************************
+****************************************************
+**   ENICSINFO: Starting stage post_elaboration   **
+****************************************************
+****************************************************
+ENICSINFO: Current time is: 21/01/2025 15:19
+ENICSINFO: ----------------------------------
+@genus:root: 59> enics_message "Checking design post elaboration"
+ENICSINFO: Checking design post elaboration
+@genus:root: 60> check_design -unresolved
+Error   : No designs are available. A design must first be read in and elaborated. [TUI-10] [check_design]
+        : There is no design here.
+        : A design must first be read in with 'read_hdl' command and elaborated with 'elaborate' command.
+Failed on check_design
+@genus:root: 61> check_design -all > $design(synthesis_reports)/post_elaboration/check_design_post_elab.rpt
+can't read "design(synthesis_reports)": no such element in array
+@genus:root: 62> if {[check_design -status]} {
+    Puts "ENICSINFO: ############# There is an issue with check_design. You better look at it! ###########"
+}
+Error   : No designs are available. A design must first be read in and elaborated. [TUI-10] [check_design]
+        : There is no design here.
+Failed on check_design
+@genus:root: 63> #save elaborated design
+@genus:root: 64> write_design -base_name $design(export_dir)/post_elaboartion/$design(TOPLEVEL)
+can't read "design(export_dir)": no such element in array
+@genus:root: 65> 
+@genus:root: 65> # Read in a floorplan for physical synthesis
+@genus:root: 66> # read_def $design(floorplan_def)
+@genus:root: 67> 
+@genus:root: 67> ##########################
+@genus:root: 68> # read constraints
+@genus:root: 69> ##########################
+@genus:root: 70> enics_message "Reading SDC"
+ENICSINFO: Reading SDC
+@genus:root: 71> read_sdc $design(functional_sdc) -stop_on_errors
+can't read "design(functional_sdc)": no such element in array
+@genus:root: 72> enics_message "Checking timing intent (lint) after loading SDC"
+ENICSINFO: Checking timing intent (lint) after loading SDC
+@genus:root: 73> check_timing_intent
+Error   : No designs are available. A design must first be read in and elaborated. [TUI-10] [check_timing_intent]
+        : No elaborated designs in memory
+Nothing to report
+1
+@genus:root: 74> check_timing_intent -verbose > $design(synthesis_reports)/post_elaboration/check_timing_post_elab.rpt
+can't read "design(synthesis_reports)": no such element in array
+@genus:root: 75> 
+@genus:root: 75> ###################################################################################
+@genus:root: 76> ## Define cost groups (reg2reg, in2reg, reg2out, in2out)
+@genus:root: 77> ###################################################################################
+@genus:root: 78> enics_default_cost_groups
+Error   : A required object parameter could not be found. [TUI-61] [define_cost_group]
+        : An object of type 'design' named 'lp_riscv_top' could not be found.
+        : Check to make sure that the object exists and is of the correct type.  The 'what_is' command can be used to determine the type of an object.
+  define_cost_group: defines a new goal for timing optimization 
+
+Usage: define_cost_group [-weight <integer>] -name <string> [-design <design>]
+
+    [-weight <integer>]:
+        weight of group for optimizations 
+    -name <string>:
+        name of the cost group 
+    [-design <design>]:
+        target design 
+1
+@genus:root: 79> enics_report_timing $design(synthesis_reports)
+can't read "design(synthesis_reports)": no such element in array
+@genus:root: 80> 
+@genus:root: 80> ################################
+@genus:root: 81> # clock gating settings
+@genus:root: 82> ################################
+@genus:root: 83> set_db [get_db design:$design(TOPLEVEL)] .lp_clock_gating_min_flops 8
+Error   : <Start> word is not recognized. [TUI-182] [get_db]
+        : 'design:lp_riscv_top' is not a recognized object/attribute. Type 'help root:' to get a list of all supported objects and attributes.
+        : Check if the given <Start> word is a valid object_type, object or attribute.
+1
+@genus:root: 84> set_db [get_db design:$design(TOPLEVEL)] .lp_clock_gating_style latch
+Error   : <Start> word is not recognized. [TUI-182] [get_db]
+        : 'design:lp_riscv_top' is not a recognized object/attribute. Type 'help root:' to get a list of all supported objects and attributes.
+1
+@genus:root: 85> 
+@genus:root: 85> ##########################
+@genus:root: 86> #     Synthesize
+@genus:root: 87> ##########################
+@genus:root: 88> enics_start_stage "synthesis"
+*********************************************
+*********************************************
+**   ENICSINFO: Starting stage synthesis   **
+*********************************************
+*********************************************
+ENICSINFO: Current time is: 21/01/2025 15:19
+ENICSINFO: ----------------------------------
+@genus:root: 89> 
+@genus:root: 89> # Set Synthesis Efforts
+@genus:root: 90> set_db syn_generic_effort low
+  Setting attribute of root '/': 'syn_generic_effort' = low
+1 low
+@genus:root: 91> set_db syn_map_effort low
+  Setting attribute of root '/': 'syn_map_effort' = low
+1 low
+@genus:root: 92> set_db syn_opt_effort low
+  Setting attribute of root '/': 'syn_opt_effort' = low
+1 low
+@genus:root: 93> 
+@genus:root: 93> # Don't use scan cells
+@genus:root: 94> enics_message "Setting Don't Use on scan flip flops"
+ENICSINFO: Setting Don't Use on scan flip flops
+@genus:root: 95> foreach cell [get_db lib_cells -if {.scan_enable_pins!=""}] {set_db $cell .avoid true}
+@genus:root: 96> 
+@genus:root: 96> if {$phys_synth_type == "floorplan"} {
+    # Synthesize to generics and place generics in floorplan
+    enics_start_stage "syn_generic"
+    syn_generic -physical
+    # Map to technology
+    enics_start_stage "technology_mapping"
+    syn_map -physical
+    enics_report_timing $design(synthesis_reports) 
+    # Post synthesis optimization
+    enics_start_stage "post_syn_opt"
+    syn_opt -physical
+} else {
+    # Synthesize to generics (non physical-aware)
+    enics_start_stage "syn_generic"
+    syn_generic 
+    # Map to technology (non physical-aware)
+    enics_start_stage "technology_mapping"
+    syn_map 
+    enics_report_timing $design(synthesis_reports)
+    enics_start_stage "post_syn_opt"
+    if {$phys_synth_type == "lef"} {
+        syn_opt -physical
+    } else {
+        syn_opt 
+    }
+}
+***********************************************
+***********************************************
+**   ENICSINFO: Starting stage syn_generic   **
+***********************************************
+***********************************************
+ENICSINFO: Current time is: 21/01/2025 15:19
+ENICSINFO: ----------------------------------
+      flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   syn_gen
+1
+@genus:root: 97> 
+@genus:root: 97> 
+@genus:root: 97> 
+@genus:root: 97> #############################
+@genus:root: 98> #     Post Synthesis Reports
+@genus:root: 99> #############################
+@genus:root: 100> enics_report_timing $design(synthesis_reports)
+can't read "design(synthesis_reports)": no such element in array
+@genus:root: 101> set post_synth_reports [list \
+    report_area \
+    report_gates \
+    report_hierarchy \
+    report_clock_gating \
+    report_design_rules \
+    report_dp \
+    report_qor \
+]
+report_area report_gates report_hierarchy report_clock_gating report_design_rules report_dp report_qor
+@genus:root: 102> foreach rpt $post_synth_reports {
+    enics_message "$rpt" medium
+    $rpt
+    $rpt > "$design(synthesis_reports)/$this_run(stage)/${rpt}.rpt"
+}
+
+ENICSINFO: report_area
+----------------------
+There are no libraries loaded.
+Failed on report area
+@genus:root: 103> 
+@genus:root: 103> #############################
+@genus:root: 104> #   Exporting the Design
+@genus:root: 105> #############################
+@genus:root: 106> enics_start_stage "export_design"
+*************************************************
+*************************************************
+**   ENICSINFO: Starting stage export_design   **
+*************************************************
+*************************************************
+ENICSINFO: Current time is: 21/01/2025 15:19
+ENICSINFO: ----------------------------------
+@genus:root: 107> enics_message "Exporting the design Database to $design(postsyn_db_base_name)"
+can't read "design(postsyn_db_base_name)": no such element in array
+@genus:root: 108> write_design -base_name $design(postsyn_db_base_name) -innovus -db
+can't read "design(postsyn_db_base_name)": no such element in array
+@genus:root: 109> enics_message "Writing the post synthesis netlist to $design(postsyn_netlist)"
+can't read "design(postsyn_netlist)": no such element in array
+@genus:root: 110> write_hdl > $design(postsyn_netlist)
+can't read "design(postsyn_netlist)": no such element in array
+@genus:root: 111> enics_message "Writing the post synthesis SDF"
+ENICSINFO: Writing the post synthesis SDF
+@genus:root: 112> mkdir -pv $design(export_dir)/post_synth
+can't read "design(export_dir)": no such element in array
+@genus:root: 113> write_sdf > $design(postsyn_sdf)
+can't read "design(postsyn_sdf)": no such element in array
+@genus:root: 114> 
+@genus:root: 114> exit
+
+Lic Summary:
+[15:29:40.368002] Cdslmd servers: ip-10-70-133-150
+[15:29:40.368010] Feature usage summary:
+[15:29:40.368011] Genus_Synthesis
+
+Normal exit.

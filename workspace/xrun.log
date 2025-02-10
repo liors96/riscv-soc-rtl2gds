@@ -1,0 +1,185 @@
+xrun(64): 23.09-s013: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	23.09-s013: Started on Jan 21, 2025 at 17:33:19 UTC
+xrun
+	-f ../scripts/xrun_options.rtl
+		-sv
+		-v93
+		-debug
+		-delay_trigger
+		-timescale 1ns/1ps
+		+bus_conflict_off
+		-define RTL
+		-f ../sourcecode/tb/tb_riscv_rtl_src_list.txt
+			-f ../libraries/libraries.TSMC65_IO.f
+				/data/tsmc/65LP/dig_libs/ARM_FEONLY/TSMCHOME_fe/digital/Front_End/verilog/tpdn65lpnv2od3_140b/tpdn65lpnv2od3.v
+				../libraries/dummy_pcorner.v
+			+incdir+../sourcecode/rtl/riscv-master/include/
+			../sourcecode/rtl/riscv-master/include/riscv_defines.sv
+			../sourcecode/rtl/riscv-master/alu_div.sv
+			../sourcecode/rtl/riscv-master/alu.sv
+			../sourcecode/rtl/soc/components/cluster_clock_gating.sv
+			../sourcecode/rtl/riscv-master/compressed_decoder.sv
+			../sourcecode/rtl/riscv-master/controller.sv
+			../sourcecode/rtl/riscv-master/cs_registers.sv
+			../sourcecode/rtl/riscv-master/debug_unit.sv
+			../sourcecode/rtl/riscv-master/decoder.sv
+			../sourcecode/rtl/riscv-master/exc_controller.sv
+			../sourcecode/rtl/riscv-master/ex_stage.sv
+			../sourcecode/rtl/riscv-master/hwloop_controller.sv
+			../sourcecode/rtl/riscv-master/hwloop_regs.sv
+			../sourcecode/rtl/riscv-master/id_stage.sv
+			../sourcecode/rtl/riscv-master/if_stage.sv
+			../sourcecode/rtl/riscv-master/load_store_unit.sv
+			../sourcecode/rtl/riscv-master/mult.sv
+			../sourcecode/rtl/riscv-master/prefetch_buffer.sv
+			../sourcecode/rtl/riscv-master/prefetch_L0_buffer.sv
+			../sourcecode/rtl/riscv-master/register_file_ff.sv
+			../sourcecode/rtl/riscv-master/riscv_core.sv
+			../sourcecode/rtl/riscv-master/include/riscv_tracer_defines.sv
+			../sourcecode/rtl/riscv-master/riscv_tracer.sv
+			../sourcecode/rtl/soc/sram_sp_16384x32_m16_be_simple.v
+			../sourcecode/rtl/soc/sram_sp_16384x32_m32_be_simple.v
+			../sourcecode/rtl/soc/sram_sp_8192x32_m32_be_simple.v
+			../sourcecode/rtl/soc/sram_sp_8192x32_m16_be_simple.v
+			../sourcecode/rtl/soc/sram_sp_8192x32_m8_be_simple.v
+			../sourcecode/rtl/soc/sram_sp_32768x32_m32_be_simple.v
+			../sourcecode/rtl/soc/sp_ram_m8_be_simple.sv
+			../sourcecode/rtl/soc/sp_ram_m16_be_simple.sv
+			../sourcecode/rtl/soc/sp_ram_m32_be_simple.sv
+			../sourcecode/rtl/soc/sram_sp_instr_wrap.v
+			../sourcecode/rtl/soc/sram_sp_data_wrap.v
+			../sourcecode/rtl/soc/lp_riscv.v
+			../sourcecode/rtl/soc/ioring.v
+			../sourcecode/rtl/soc/lp_riscv_top.v
+			../sourcecode/tb/tb_lp_riscv_mem_pkg.v
+			+MEMLOAD=PRELOAD
+			../sourcecode/tb/tb_lp_riscv.v
+		-input ../scripts/simulation.tcl
+
+   User defined plus("+") options:
+	+bus_conflict_off
+	+MEMLOAD=PRELOAD
+
+SOFTINCLUDE $XPEDION/aa/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,12): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $EMXHOME/emxinterface/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,14): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $XPEDION/aa/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,12): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $EMXHOME/emxinterface/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,14): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $XPEDION/aa/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,12): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $EMXHOME/emxinterface/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,14): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $XPEDION/aa/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,12): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $EMXHOME/emxinterface/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,14): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $XPEDION/aa/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,12): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $EMXHOME/emxinterface/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,14): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $XPEDION/aa/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,12): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $EMXHOME/emxinterface/cds.lib
+|
+xrun: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,14): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $XPEDION/aa/cds.lib
+|
+xmsim: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,12): cds.lib Invalid environment variable ''.
+SOFTINCLUDE $EMXHOME/emxinterface/cds.lib
+|
+xmsim: *W,DLCVAR (/tools/rccad/RC2SKILL/1.0/cds.site.lib,14): cds.lib Invalid environment variable ''.
+Loading snapshot worklib.PCLAMP1ANA:v .................... Done
+xcelium> source /tools/cadence/XCELIUM/23.09.013/tools/xcelium/files/xmsimrc
+xcelium> database -open -event waves -into waves.shm -default
+Created default SHM database waves
+xcelium> probe -create tb_lp_riscv  -depth all -tasks -functions -uvm -packed 16k -unpacked 64k -all -dynamic -memories -database waves
+xmsim: *W,MTDYNUSE: SHM probe is configured with dynamic object dumping enabled. This is likely to degrade probing performance.
+xmsim: *W,PRHOPT: The design contains optimized signals. To improve simulation performance these signals are excluded.
+Created probe 1
+xcelium> run
+Using MEMLOAD method: PRELOAD
+
+
+Preloading memory
+Preloading instruction memory from ../sourcecode/tb/slm_files/l2_stim.slm
+Preloading data memory from ../sourcecode/tb/slm_files/tcdm_bank0.slm
+
+
+pre-sorted Vector
+
+mem[h00000800] = 3162636640
+mem[h00000801] = 3466016388
+mem[h00000802] = 2097897441
+mem[h00000803] = 1090967401
+mem[h00000804] = 1852987331
+mem[h00000805] = 3275455597
+mem[h00000806] =   56728301
+mem[h00000807] = 1866761669
+mem[h00000808] = 1169773426
+mem[h00000809] = 3178620001
+mem[h0000080a] = 3277442669
+mem[h0000080b] = 4154847958
+mem[h0000080c] = 3675246237
+mem[h0000080d] =  861296973
+mem[h0000080e] =   45086956
+mem[h0000080f] =  964684633
+mem[h00000810] = 2679711270
+mem[h00000811] = 2675541541
+mem[h00000812] = 2442515466
+mem[h00000813] =  791804229
+mem[h00000814] = 2018800599
+mem[h00000815] = 1169479538
+
+
+[TRACER] Output filename is: trace_core_00_0.log
+
+
+post-sorted Vector
+
+mem[h00000800] =   45086956
+mem[h00000801] =   56728301
+mem[h00000802] =  791804229
+mem[h00000803] =  861296973
+mem[h00000804] =  964684633
+mem[h00000805] = 1090967401
+mem[h00000806] = 1169479538
+mem[h00000807] = 1169773426
+mem[h00000808] = 1852987331
+mem[h00000809] = 1866761669
+mem[h0000080a] = 2018800599
+mem[h0000080b] = 2097897441
+mem[h0000080c] = 2442515466
+mem[h0000080d] = 2675541541
+mem[h0000080e] = 2679711270
+mem[h0000080f] = 3162636640
+mem[h00000810] = 3178620001
+mem[h00000811] = 3275455597
+mem[h00000812] = 3277442669
+mem[h00000813] = 3466016388
+mem[h00000814] = 3675246237
+mem[h00000815] = 4154847958
+
+
+
+Look, Ma! The numbers are sorted!
+And my ID is at index number:  1
+
+
+Simulation complete via $finish(1) at time 120880 NS + 15
+../sourcecode/tb/tb_lp_riscv.v:182        $finish() ;
+xcelium> exit
+TOOL:	xrun(64)	23.09-s013: Exiting on Jan 21, 2025 at 17:33:24 UTC  (total: 00:00:05)

@@ -1,0 +1,6 @@
+316263664
+Floorplan:                  1200 x 1000
+Period:                     6.0 ns
+Hold Slack:                 0 ps
+Startpoint:                 (R) lp_riscv/i_riscv_core_id_stage_i_alu_operator_ex_o_reg[2]/CK
+Endpoint:                   (F) lp_riscv/i_riscv_core_id_stage_i_mult_operand_b_ex_o_reg[9]/D
